@@ -64,4 +64,66 @@ persp(x, y, fa, theta = 30, phi = 70)
 persp(x, y, fa, theta = 30, phi = 40)
 
 ### Indexing data
+A <- matrix(1:16, 4, 4)
+A[2, 3]
+A[c(1, 3), c(2, 4)]
+A[1:3, 2:4]
+A[1:2, ]
+A[, 1:2]
+A[1, ]
+A[-c(1, 3), ]
+A[-c(1, 3), -c(1, 3, 4)]
+dim(A) # dimensions of a matrix (rows, columns)
 
+### Loading data
+library(ISLR2)
+Auto <- read.table("Auto.data")
+View(Auto)
+head(Auto)
+
+Auto <- read.table("Auto.data", header = TRUE, na.strings = "?", 
+                   stringsAsFactors = TRUE) 
+Auto <- read.csv("Auto.csv", na.strings = "?")
+View(Auto)
+
+dim(Auto)
+Auto[1:4, ] # extract first 4 rows of dataframe
+Auto <- na.omit(Auto)
+dim(Auto)
+names(Auto) # check names of variables
+
+### Additional graphical and numerical summaries
+plot(Auto$cylinders, Auto$mpg)
+attach(Auto) # make variables available for reference without $
+plot(cylinders, mpg) # generates scatter plot
+
+cylinders <- as.factor(cylinders) # convert quantitative variable to qualitative 
+plot(cylinders, mpg) # generates box plot
+plot(cylinders, mpg, col = "red")
+plot(cylinders, mpg, col = "red", 
+     varwidth = TRUE) # draw width of box proportionate to sample size
+plot(cylinders, mpg, col = "red", 
+     varwidth = TRUE, 
+     horizontal = TRUE) # flip box plot to horizontal 
+plot(cylinders, mpg, col = "red", 
+     varwidth = TRUE,
+     xlab = "cylinders", ylab = "MPG")
+
+hist(mpg) # plot histogram
+hist(mpg, col = 2) # 2 = red
+hist(mpg, col = 2, breaks = 15)
+
+pairs( # generates scatterplot matrix (scatterplot for every variable pair)
+  ~ mpg + displacement + horsepower + weight + acceleration, 
+  data = Auto) 
+
+plot(horsepower, mpg)
+identify(horsepower, mpg, name) # click + esc to identify val of variable on plot
+
+summary(Auto) # numerical summary of each variable in dataset
+summary(mpg) # numerical summary of a single variable
+
+q() # quit R; save workspace to preserve loaded datasets and objects
+
+savehistory() # save record of all commands
+loadhistory() # load saved record of all commands
