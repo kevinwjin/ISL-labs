@@ -41,6 +41,10 @@ $X_1 = X_2 = X_3 = 0$ using $K$-nearest neighbors.
 8. This exercise relates to the `College` data set, which can be found in the file `College.csv` on the book website. It contains a number of variables for 777 different universities and colleges in the US. 
 ```{r college}
 college <- read.csv("College.csv")
+rownames(college) <- college[, 1] # name each row with college name
+college <- college [, -1] # delete original names column
+
+pairs(college[, 2:11]) # scatterplot matrix of first ten variables
 
 ```
 
